@@ -1,5 +1,5 @@
 import jogo from "./Jogo"
-export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,setPalavra}){
+export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,setPalavra,erros,setErros,desabilitarBotao,setDesabilitarBotao,clicado,setClicado}){
     const letrasAlfabeto = [
         {letra:"a"},{letra:"b"},{letra:"c"},{letra:"d"},{letra:"e"},{letra:"f"},
         {letra:"g"},{letra:"h"},{letra:"i"},{letra:"j"},{letra:"k"},{letra:"l"},
@@ -7,7 +7,10 @@ export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,s
         {letra:"s"},{letra:"t"},{letra:"u"},{letra:"v"},{letra:"w"},{letra:"x"},
         {letra:"y"},{letra:"z"}
     ]
+    
+   
     function checar(letra){
+    
         if (palavra.includes(letra)){
             console.log(letra)
             console.log(palavra)
@@ -20,14 +23,22 @@ export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,s
             }
             console.log(revelarLetra)
             setPalavraEscondida(revelarLetra.join(" ")) 
-        
+        }
+        else {
+           erros = erros +1 
+           setErros(erros)
+        }
+        if(erros === 6){
+            alert("perdeu")
         }
     }
     return (
         (
             <div className="layoutLetras">
                 {letrasAlfabeto.map((l) =>
-                    <button onClick={()=>checar(l.letra)} className="letras"> {l.letra}
+                    <button 
+                     disabled={ false } 
+                     onClick={()=>checar(l.letra)} className="letras"> {l.letra}
                     </button>
                 )}
             </div>
