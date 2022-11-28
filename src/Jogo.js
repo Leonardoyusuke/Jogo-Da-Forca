@@ -2,12 +2,14 @@ import { useState } from "react"
 import palavras from "./palavras"
 
 export default function CriarLayout({palavraEscondida, setPalavraEscondida,palavra,setPalavra,erros,setErros,desabilitarBotao,setDesabilitarBotao, clicado, setClicado,cor,setCor}){
-    
+    let novaPalavra = palavras[Math.floor(Math.random()*palavras.length)]
     function iniciar(){
-        let novaPalavra = palavras[Math.floor(Math.random()*palavras.length)]
+        
         setDesabilitarBotao(false)
         setPalavra(novaPalavra)
-        esconderPalavra(novaPalavra);
+        esconderPalavra(novaPalavra)
+        setErros(0)
+        setCor("black")
         setClicado([]);
         }
         console.log(palavraEscondida)
@@ -18,9 +20,9 @@ export default function CriarLayout({palavraEscondida, setPalavraEscondida,palav
 
     return (
         <div className="layout">
-            <div  className={`palavraEscolhida ${cor}`}>{palavraEscondida} </div>
-            <img className="madeira1" src={`assets/forca${erros}.png`} />
-            <button onClick={iniciar} className="botaoPalavra"> Escolher Palavra</button>
+            <div data-test="word" data-answer={novaPalavra} className={`palavraEscolhida ${cor}`}>{palavraEscondida} </div>
+            <img data-test="game-image" className="madeira1" src={`assets/forca${erros}.png`} />
+            <button  onClick={iniciar} data-test="choose-word" className="botaoPalavra"> Escolher Palavra</button>
         </div>
     )
 

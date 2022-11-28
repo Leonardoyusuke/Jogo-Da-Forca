@@ -1,5 +1,5 @@
 import jogo from "./Jogo"
-export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,setPalavra,erros,setErros,desabilitarBotao,setDesabilitarBotao,clicado,setClicado}){
+export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,setPalavra,erros,setErros,desabilitarBotao,setDesabilitarBotao,clicado,setClicado,setCor,cor}){
     const letrasAlfabeto = [
         {letra:"a"},{letra:"b"},{letra:"c"},{letra:"d"},{letra:"e"},{letra:"f"},
         {letra:"g"},{letra:"h"},{letra:"i"},{letra:"j"},{letra:"k"},{letra:"l"},
@@ -29,14 +29,21 @@ export default function Teclado({palavraEscondida, setPalavraEscondida,palavra,s
            setErros(erros)
         }
         if(erros === 6){
+            setCor("red")
             alert("perdeu")
         }
+        else if (!palavraEscondida.includes("_")){
+            setCor("green")}
+        else {
+            setCor("black")
+        }
+       
     }
     return (
         (
             <div className="layoutLetras">
                 {letrasAlfabeto.map((l) =>
-                    <button 
+                    <button data-test="letter"
                      disabled={ false } 
                      onClick={()=>checar(l.letra)} className="letras"> {l.letra}
                     </button>
